@@ -1,0 +1,112 @@
+.topdiv {
+    height: 50px;
+    gap: 0px;
+    opacity: 0px;
+    background-color: #eb6626;
+  }
+  
+.logo {
+    width: 135px;
+    height: 50px;
+    left: 60px;
+  }
+  
+  .heading {
+    display: inline-block;
+    position: relative;
+    text-align: center; /* Center the text */
+}
+
+.underline-hr {
+    border: 0;
+    height: 3px; /* Thickness of the underline */
+    width: 50%; /* Width of the underline relative to the heading */
+    background-color: #eb6626;
+    margin: 0 auto; /* Center the underline */
+    display: block; /* Ensure it behaves as a block element */
+}
+
+.fthphaseimg {
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 1px 1px 5px grey;
+  }
+  
+.registration-form {
+    width: 80%;
+    margin: 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+.registration-form.updated {
+    width: 100%;
+}
+
+.registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.registration-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.registration-form input[type="text"],
+.registration-form input[type="email"],
+.registration-form input[type="password"],
+.registration-form input[type="number"],
+.registration-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.registration-form input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.registration-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #EB6626;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.registration-form button:hover {
+    background-color: #d55b20;
+}
+
+.register-heading-action{
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: left;
+    color: #EB6626;
+}
+
+
+
+.login-heading{
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 36px;
+    text-align: left;
+    color: #000;
+}
+
+.video-style {
+    border: 2px solid black;  
+    border-radius: 10px;      
+  }
+  

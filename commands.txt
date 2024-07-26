@@ -1,0 +1,19 @@
+install react
+------------------------
+npx create-react-app my-react-app
+
+cd my-react-app
+
+
+install bootstrap & awesome
+------------------------
+npm install bootstrap
+npm install @fortawesome/fontawesome-free
+
+src/index.js->
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+install react-router-dom
+-------------------------
+npm install react-router-dom
