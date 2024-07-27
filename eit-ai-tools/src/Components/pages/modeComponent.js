@@ -39,7 +39,7 @@ const ModelComponent = () => {
                                 <div className="col-4 text-right">
                                      <button 
                                      onClick={handleNumberPlateDetection} type="button" class="btn btn-outline-dark">
-                                        Try It
+                                       Demo
                                     </button>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@ const ModelComponent = () => {
                                  onClick={handleFaceDetection}
                                  type="button"
                                  class="btn btn-outline-dark">
-                                    Try It
+                                    Demo
                                 </button>
                                 </div>
                             </div>
