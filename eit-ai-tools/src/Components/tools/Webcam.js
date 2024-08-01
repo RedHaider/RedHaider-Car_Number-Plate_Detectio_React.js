@@ -1,27 +1,49 @@
+import React, { useEffect, useRef, useState } from 'react';
 import '../style.css';
-import React, { useEffect, useRef } from 'react';
 
-const Webcam = () => {
+const Webcam = ({ onCapture }) => {
   const videoRef = useRef(null);
+  const [videoDevices, setVideoDevices] = useState([]);
+  const [selectedDeviceId, setSelectedDeviceId] = useState(null);
 
   useEffect(() => {
-    // Function to start the webcam feed
-    const startVideo = async () => {
+    const getVideoDevices = async () => {
       try {
-        // Request access to the webcam
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
-        // Assign the stream to the video element
-        if (videoRef.current) {
-          videoRef.current.srcObject = stream;
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+        setVideoDevices(videoDevices);
+        if (videoDevices.length > 0) {
+          setSelectedDeviceId(videoDevices[0].deviceId);
         }
       } catch (err) {
-        console.error("Error accessing webcam:", err);
+        console.error("Error enumerating devices:", err);
+      }
+    };
+
+    getVideoDevices();
+  }, []);
+
+  useEffect(() => {
+    const startVideo = async () => {
+      if (selectedDeviceId) {
+        try {
+          const stream = await navigator.mediaDevices.getUserMedia({
+            video: { deviceId: { exact: selectedDeviceId } }
+          });
+          if (videoRef.current) {
+            videoRef.current.srcObject = stream;
+            videoRef.current.onloadedmetadata = () => {
+              videoRef.current.play();
+            };
+          }
+        } catch (err) {
+          console.error("Error accessing webcam:", err);
+        }
       }
     };
 
     startVideo();
 
-    // Cleanup function to stop the video stream when the component is unmounted
     return () => {
       if (videoRef.current && videoRef.current.srcObject) {
         const stream = videoRef.current.srcObject;
@@ -29,17 +51,35 @@ const Webcam = () => {
         tracks.forEach(track => track.stop());
       }
     };
-  }, []);
+  }, [selectedDeviceId]);
+
+  const handleDeviceChange = (event) => {
+    setSelectedDeviceId(event.target.value);
+  };
+
+  const handleCapture = () => {
+    if (videoRef.current) {
+      const canvas = document.createElement('canvas');
+      canvas.width = videoRef.current.videoWidth;
+      canvas.height = videoRef.current.videoHeight;
+      const context = canvas.getContext('2d');
+      context.drawImage(videoRef.current, 0, 0, canvas.width, canvas.height);
+      const imageSrc = canvas.toDataURL('image/jpeg');
+      onCapture(imageSrc);
+    }
+  };
 
   return (
     <div>
-      <video
-        ref={videoRef}
-        autoPlay
-        width="300"
-        height="225"
-        className="video-style"
-      />
+      <select className='mb-2' onChange={handleDeviceChange} value={selectedDeviceId || ''}>
+        {videoDevices.map(device => (
+          <option key={device.deviceId} value={device.deviceId}>
+            {device.label || 'Unnamed Device'}
+          </option>
+        ))}
+      </select>
+      <video ref={videoRef} autoPlay width="100%" height="auto" className="video-style" />
+      <button type="button" className="btn btn-dark mt-3" onClick={handleCapture}>Capture</button>
     </div>
   );
 };
