@@ -11,7 +11,7 @@ const Login = () => {
     };
 
     return ( 
-        <div className="container mt-5 mb-5">
+        <div className="container mt-5 mb-5 login-style">
             <form className="registration-form" onSubmit={handleSubmit}>
                 <h2>Login</h2>
 
